@@ -1,7 +1,25 @@
 import { Link } from 'react-router-dom';
 import image from '../../assets/images/login/login.svg';
 import LoginNavbar from '../LoginNavbar/LoginNavbar';
+import { useContext } from 'react';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 const Register = () => {
+    const { createUser } = useContext(AuthContext);
+    const handleRegister = event => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(name, email, password);
+        createUser(email, password)
+        .then(result =>{
+            console.log(result.user)
+        })
+        .catch(error =>{
+            console.error(error)
+        })
+    }
     return (
         <div>
             <div className='max-w-7xl mx-auto px-4 mb-16'>
@@ -13,25 +31,25 @@ const Register = () => {
                         <img className='' src={image} alt="" />
                     </div>
                     <div className='flex-1'>
-                        <form>
+                        <form onSubmit={handleRegister}>
                             <h2 className='text-3xl font-bold mb-4'>Please Register Now</h2>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Name</span>
                                 </label>
-                                <input type="text" placeholder="Your Name" className="input input-bordered" required />
+                                <input type="text" name='name' placeholder="Your Name" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="email" placeholder="Your Email" className="input input-bordered" required />
+                                <input type="email" name='email' placeholder="Your Email" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="password" placeholder="Your Password" className="input input-bordered" required />
+                                <input type="password" name='password' placeholder="Your Password" className="input input-bordered" required />
                             </div>
                             <input className='bg-[#ff3438] px-4 py-2 rounded-lg mt-4 w-full text-white font-bold' type="submit" value="Register" />
                         </form>
