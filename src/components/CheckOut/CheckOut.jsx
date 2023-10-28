@@ -1,12 +1,9 @@
-import { useLoaderData } from "react-router-dom";
 import NavBar from "../Navbar/NavBar";
 import CheckOutForm from "../checkOutForm/CheckOutForm";
 import Footer from "../footer/Footer";
 
 const CheckOut = () => {
-    const service = useLoaderData();
-    const {title, _id} = service;
-    console.log(service)
+    
     return (
         <div>
             <div className="max-w-7xl mx-auto px-4 mb-10">
