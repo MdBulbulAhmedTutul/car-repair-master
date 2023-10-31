@@ -35,7 +35,7 @@ const BookingTable = ({ siBook, handleDelete, handleBookingConfirm, status }) =>
                         <td>{price}</td>
                         <th>
                             {
-                                status === 'confirm' ? <span className="font-bold text-primary">Confirmed</span>
+                                status === 'confirm' ? <span className="font-bold text-blue-500">Confirmed</span>
                                 :
                                 <button onClick={() => handleBookingConfirm(_id)} className="btn btn-ghost">Confirm</button>
                             }

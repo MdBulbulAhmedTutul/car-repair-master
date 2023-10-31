@@ -8,7 +8,6 @@ const Teams = () => {
         .then(res => res.json())
         .then(data => setTeams(data))
     },[])
-    console.log(teams)
     return (
         <div>
             <div className="text-center mb-16">

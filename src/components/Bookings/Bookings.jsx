@@ -68,6 +68,7 @@ const Bookings = () => {
                             siBook={siBook}
                             handleDelete={handleDelete}
                             handleBookingConfirm={handleBookingConfirm}
+                            status={siBook.status}
                         >
                         </BookingTable>)
                 }
