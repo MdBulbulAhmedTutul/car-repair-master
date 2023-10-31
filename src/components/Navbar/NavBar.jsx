@@ -2,12 +2,20 @@ import { Link, NavLink } from "react-router-dom";
 import { AiFillLock } from 'react-icons/ai';
 import { CiSearch } from 'react-icons/ci';
 import logo from '../../assets/logo.svg';
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const NavBar = () => {
+    const {user} = useContext(AuthContext);
     const navItem = <>
         <li><NavLink to="/">Home</NavLink></li>
+        {
+            user ?
+            <li className="ml-2"><NavLink to="/bookings">Bookings</NavLink></li>
+            :
+            []
+        }
         <li className="ml-2"><NavLink to="/login">Login</NavLink></li>
-        <li className="ml-2"><NavLink to="/bookings">Bookings</NavLink></li>
     </>
     return (
         <div className="navbar bg-base-100">

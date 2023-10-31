@@ -8,8 +8,8 @@ const PrivateRoutes = ({ children }) => {
 
     if (loading) {
         return <div className="text-center mt-[300px]">
-            <progress className="progress w-56"></progress>
-        </div>
+                   <progress className="progress w-56"></progress>
+               </div>
     }
 
 

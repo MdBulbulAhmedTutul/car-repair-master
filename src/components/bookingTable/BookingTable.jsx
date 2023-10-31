@@ -1,26 +1,10 @@
 
 // eslint-disable-next-line react/prop-types
-const BookingTable = ({ siBook, handleDelete }) => {
+const BookingTable = ({ siBook, handleDelete, handleBookingConfirm, status }) => {
     // eslint-disable-next-line react/prop-types, no-unused-vars
     const { _id, img, customerName, date, price, service } = siBook;
     
-    // Swal.fire({
-    //   title: 'Are you sure?',
-    //   text: "You won't be able to revert this!",
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#3085d6',
-    //   cancelButtonColor: '#d33',
-    //   confirmButtonText: 'Yes, delete it!'
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     Swal.fire(
-    //       'Deleted!',
-    //       'Your file has been deleted.',
-    //       'success'
-    //     )
-    //   }
-    // })
+    
     return (
         <div className="overflow-x-auto">
             <table className="table">
@@ -50,7 +34,11 @@ const BookingTable = ({ siBook, handleDelete }) => {
                         </td>
                         <td>{price}</td>
                         <th>
-                            <button className="btn btn-ghost ">Pending</button>
+                            {
+                                status === 'confirm' ? <span className="font-bold text-primary">Confirmed</span>
+                                :
+                                <button onClick={() => handleBookingConfirm(_id)} className="btn btn-ghost">Confirm</button>
+                            }
                         </th>
                     </tr>
                 </tbody>
