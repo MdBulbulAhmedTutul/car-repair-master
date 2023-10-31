@@ -15,6 +15,7 @@ import AuthProvider from './components/AuthProvider/AuthProvider';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import CheckOut from './components/CheckOut/CheckOut';
 import Bookings from './components/Bookings/Bookings';
+import PrivateRoutes from './components/PrivateRoutes/PrivateRoutes';
 
 
 const router = createBrowserRouter([
@@ -37,12 +38,12 @@ const router = createBrowserRouter([
       },
       {
         path: 'checkout/:id',
-        element: <CheckOut></CheckOut>,
+        element: <PrivateRoutes><CheckOut></CheckOut></PrivateRoutes>,
         loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
       },
       {
         path: '/bookings',
-        element: <Bookings></Bookings>
+        element: <PrivateRoutes><Bookings></Bookings></PrivateRoutes>
       }
     ]
   },

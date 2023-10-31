@@ -1,5 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import NavBar from "../Navbar/NavBar";
+import BookingTable from "../bookingTable/BookingTable";
+import Footer from "../footer/Footer";
 
 const Bookings = () => {
     const { user } = useContext(AuthContext);
@@ -10,10 +13,20 @@ const Bookings = () => {
             .then(res => res.json())
             .then(data => setBookings(data))
     }, [])
-    console.log(bookings)
+
     return (
         <div>
-            <h2>Bookings: {bookings.length}</h2>
+            <div className="max-w-7xl mx-auto px-4 mb-10">
+                <NavBar></NavBar>
+            </div>
+            <div className="max-w-7xl mx-auto px-4 my-16">
+                {
+                    bookings.map(siBook => <BookingTable key={siBook._id} siBook={siBook}></BookingTable>)
+                }
+            </div>
+            <div className="">
+                <Footer></Footer>
+            </div>
         </div>
     );
 };
