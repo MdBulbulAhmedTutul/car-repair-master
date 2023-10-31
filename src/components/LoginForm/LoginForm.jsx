@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import image from '../../assets/images/login/login.svg';
 import { useContext } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProvider';
+import axios from 'axios';
 const LoginForm = () => {
     const { logIn } = useContext(AuthContext);
     const location = useLocation();
@@ -14,13 +15,21 @@ const LoginForm = () => {
         const password = form.password.value;
         console.log(email, password);
         logIn(email, password)
-        .then(result => {
-            console.log(result.user);
-            navigate(location?.state ? location?.state : '/');
-        })
-        .catch(error =>{
-            console.error(error)
-        })
+            .then(result => {
+                const loggedInUser = result.user;
+                console.log(loggedInUser);
+                const user = { email };
+                // navigate(location?.state ? location?.state : '/');
+
+                // get access token
+                axios.post('http://localhost:5000/jwt', user)
+                .then(res =>{
+                    console.log(res.data)
+                })
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
     return (
         <div className='flex items-center flex-col lg:flex-row'>
