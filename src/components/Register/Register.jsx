@@ -5,8 +5,9 @@ import { useContext } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import { BsFacebook, BsLinkedin } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
+import Swal from 'sweetalert2';
 const Register = () => {
-    const { createUser } = useContext(AuthContext);
+    const { createUser, googleLogin } = useContext(AuthContext);
     const handleRegister = event => {
         event.preventDefault();
         const form = event.target;
@@ -16,11 +17,23 @@ const Register = () => {
         console.log(name, email, password);
         createUser(email, password)
             .then(result => {
-                console.log(result.user)
+                console.log(result.user);
+                Swal.fire('User Create Successfull')
             })
             .catch(error => {
                 console.error(error)
             })
+    }
+
+    const handleGoogleRegister = () =>{
+        googleLogin()
+        .then(result =>{
+            console.log(result.user);
+            Swal.fire('User Login Successfull')
+        })
+        .catch(error =>{
+            console.error(error)
+        })
     }
     return (
         <div>
@@ -57,10 +70,10 @@ const Register = () => {
                         </form>
                         <div className='mt-4 text-center'>
                             <p>Or Sign Up with</p>
-                            <div className='flex items-center my-5 justify-center'>
-                                <a href="" className='text-2xl'><BsFacebook></BsFacebook></a>
-                                <a href="" className='text-2xl ml-2'><BsLinkedin></BsLinkedin></a>
-                                <a href="" className='text-2xl ml-2'><FcGoogle></FcGoogle></a>
+                            <div className=' my-5 justify-center'>
+                                <button className='text-2xl border-2 border-[#ff3438] px-4 py-2 rounded-lg'><BsFacebook></BsFacebook></button>
+                                <button className='text-2xl border-2 border-[#ff3438] px-4 py-2 rounded-lg ml-4'><BsLinkedin></BsLinkedin></button>
+                                <button onClick={handleGoogleRegister} className='text-2xl border-2 border-[#ff3438] px-4 py-2 rounded-lg ml-4'><FcGoogle></FcGoogle></button>
                             </div>
                         </div>
                         <p className='my-4'>Dont have an account Please <Link className='font-bold text-xl text-[#ff3438]' to="/login">Login</Link></p>

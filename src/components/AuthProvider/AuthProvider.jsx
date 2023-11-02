@@ -1,13 +1,20 @@
 import { createContext, useEffect, useState } from "react";
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import app from "../firebase/firebase.config";
 
 export const AuthContext = createContext(null);
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
     const auth = getAuth(app);
+    const provider = new GoogleAuthProvider;
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    // google login
+    const googleLogin = () =>{
+        setLoading(true);
+        return signInWithPopup(auth, provider)
+    }
 
     // create User
     const createUser = (email, password) => {
@@ -43,7 +50,8 @@ const AuthProvider = ({ children }) => {
         user,
         logOut,
         logIn,
-        loading
+        loading,
+        googleLogin,
     };
     return (
         <AuthContext.Provider value={authInfo}>
