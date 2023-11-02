@@ -3,6 +3,8 @@ import image from '../../assets/images/login/login.svg';
 import { useContext } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import axios from 'axios';
+import { BsFacebook, BsLinkedin } from 'react-icons/bs';
+import { FcGoogle } from 'react-icons/fc';
 const LoginForm = () => {
     const { logIn } = useContext(AuthContext);
     const location = useLocation();
@@ -23,9 +25,9 @@ const LoginForm = () => {
 
                 // get access token
                 axios.post('http://localhost:5000/jwt', user)
-                .then(res =>{
-                    console.log(res.data)
-                })
+                    .then(res => {
+                        console.log(res.data)
+                    })
             })
             .catch(error => {
                 console.error(error)
@@ -53,6 +55,14 @@ const LoginForm = () => {
                     </div>
                     <input className='bg-[#ff3438] px-4 py-2 rounded-lg mt-4 w-full text-white font-bold' type="submit" value="Login" />
                 </form>
+                <div className='mt-4 text-center'>
+                    <p>Or Sign Up with</p>
+                    <div className='flex items-center my-5 justify-center'>
+                        <a href="" className='text-2xl'><BsFacebook></BsFacebook></a>
+                        <a href="" className='text-2xl ml-2'><BsLinkedin></BsLinkedin></a>
+                        <a href="" className='text-2xl ml-2'><FcGoogle></FcGoogle></a>
+                    </div>
+                </div>
                 <p className='my-4'>Dont have an account Please <Link className='font-bold text-xl text-[#ff3438]' to="/register">Register</Link></p>
             </div>
         </div>
