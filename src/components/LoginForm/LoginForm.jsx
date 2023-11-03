@@ -22,10 +22,10 @@ const LoginForm = () => {
                 const loggedInUser = result.user;
                 console.log(loggedInUser);
                 const user = { email };
-                // navigate(location?.state ? location?.state : '/');
-                Swal.fire('User Login Successfull')
+                Swal.fire('User Login Successfull');
+                navigate(location?.state ? location?.state : '/');
                 // get access token
-                axios.post('http://localhost:5000/jwt', user)
+                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
                     .then(res => {
                         console.log(res.data)
                     })
@@ -36,13 +36,13 @@ const LoginForm = () => {
     }
     const handleGoogleLogin = () => {
         googleLogin()
-        .then(result =>{
-            console.log(result.user);
-            Swal.fire('User Login Successfull')
-        })
-        .catch(error =>{
-            console.error(error)
-        })
+            .then(result => {
+                console.log(result.user);
+                Swal.fire('User Login Successfull');
+            })
+            .catch(error => {
+                console.error(error);
+            })
     }
     return (
         <div className='flex items-center flex-col lg:flex-row'>
